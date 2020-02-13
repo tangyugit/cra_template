@@ -4,6 +4,7 @@ import less from 'less';
 import App from '@/pages/home/App';
 import * as serviceWorker from '@/utils/serviceWorker';
 
+import '@/assets/css/animations.css'
 // 由于 antd 组件的默认文案是英文，所以需要修改为中文
 import 'antd/es/locale/zh_CN';
 import moment from 'moment';

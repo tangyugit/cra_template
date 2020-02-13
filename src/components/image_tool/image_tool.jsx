@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import '@/components/image_tool/image_tool.less'
-import { message } from 'antd'
+import { message, Slider } from 'antd'
 
 class ImageTool extends Component {
     constructor(props) {
         super(props);
-        this.img = require('@/img/bg.jpg');
+        this.timing = null;     //播放定时器
         this.state = {
             isImgLoaded: false, //图片是否加载完成
             imgScale: null,     //图片宽高比
@@ -17,14 +17,19 @@ class ImageTool extends Component {
             oriHeight: null,    //容器原始高度
             innerWidth: null,   //比例缩小宽度
             innerHeight: null,  //比例缩小高度
+            play: false,        //是否播放
+            playSpeed: 50,      //播放速度
+            maxSpeed: 100,      //最大播放速度
+            minSpeed: 1,        //最小播放速度
+            showAniClass: false,//底部动画类 
             imgCon: { width: '100%', height: '100%', top: 0, left: 0 },
             imgConCon: { width: '100%', height: '100%', top: 0, left: 0, marginTop: 0, marginLeft: 0, transform: 'rotate(0deg)' }
         };
     }
     render() {
         return (
-            <div className='ImageTool btn_border_radius'>
-                <img id='ImageTool-img' style={{ display: 'none' }} onLoad={ this.imgOnLoad } src={ this.img } alt=""/>
+            <div onMouseEnter={ async ()=> await this.setState({ showAniClass: true }) } onMouseLeave={ async ()=> await this.setState({ showAniClass: false }) } className='ImageTool btn_border_radius'>
+                <img id='ImageTool-img' style={{ display: 'none' }} onLoad={ this.imgOnLoad } src={ this.props.src } alt=""/>
                 {
                     this.state.isImgLoaded ? 
                     (
@@ -36,7 +41,7 @@ class ImageTool extends Component {
                         }} id='image-con'>
                             <div style={{ 
                                 backgroundSize: this.state.imgScale < (this.state.oriWidth/this.state.oriHeight) ? 'auto 100%' : '100% auto',
-                                backgroundImage: `url(${this.img})`,
+                                backgroundImage: `url(${this.props.src})`,
                                 width: this.state.imgConCon.width,
                                 height: this.state.imgConCon.height,
                                 top: this.state.imgConCon.top,
@@ -50,14 +55,27 @@ class ImageTool extends Component {
                     :
                     ''
                 }
-                <div className='bottom_tool ty_flex'>
-                    <div onClick={ this.prev } className='funcs' title='上一张'><img src={ require('@/img/image_tools/houtui.png') } alt=""/></div>
-                    <div onClick={ this.next } className='funcs' title='下一张'><img src={ require('@/img/image_tools/qianjin.png') } alt=""/></div>
-                    <div onClick={ this.imageUp } className='funcs' title='放大'><img src={ require('@/img/image_tools/enlarge.png') } alt=""/></div>
-                    <div onClick={ this.imageDown } className='funcs' title='缩小'><img src={ require('@/img/image_tools/reduce.png') } alt=""/></div>
-                    <div onClick={ this.turnLeft } className='funcs' title='左旋'><img src={ require('@/img/image_tools/xiangzuoxuanzhuan.png') } alt=""/></div>
-                    <div onClick={ this.turnRight } className='funcs' title='右旋'><img src={ require('@/img/image_tools/xiangyouxuanzhuan.png') } alt=""/></div>
-                    <div onClick={ this.reset } className='funcs' title='重置'><img src={ require('@/img/image_tools/zhongzhi-.png') } alt=""/></div>
+                <div className={ `bottom_tool ty_flex ${ this.state.showAniClass ? 'lb-moveFromBottom' : 'ty_hide' }` }>
+                    <div onClick={ this.prev } className='funcs' title='上一张'><img src={ require('@/assets/img/image_tools/houtui.png') } alt=""/></div>
+                    <div onClick={ this.next } className='funcs' title='下一张'><img src={ require('@/assets/img/image_tools/qianjin.png') } alt=""/></div>
+                    <div onClick={ this.imageUp } className='funcs' title='放大'><img src={ require('@/assets/img/image_tools/enlarge.png') } alt=""/></div>
+                    <div onClick={ this.imageDown } className='funcs' title='缩小'><img src={ require('@/assets/img/image_tools/reduce.png') } alt=""/></div>
+                    <div onClick={ this.turnLeft } className='funcs' title='左旋'><img src={ require('@/assets/img/image_tools/xiangzuoxuanzhuan.png') } alt=""/></div>
+                    <div onClick={ this.turnRight } className='funcs' title='右旋'><img src={ require('@/assets/img/image_tools/xiangyouxuanzhuan.png') } alt=""/></div>
+                    <div onClick={ this.reset } className='funcs' title='重置'><img src={ require('@/assets/img/image_tools/zhongzhi-.png') } alt=""/></div>
+                    <div onClick={ this.savePlay } className='funcs' title='动画下载'><img src={ require('@/assets/img/image_tools/download.png') } alt=""/></div>
+                    <div onClick={ this.savePicture } className='funcs' title='保存图片'><img src={ require('@/assets/img/image_tools/picture.png') } alt=""/></div>
+                    {
+                        !this.state.play ? 
+                        <div onClick={ this.play } className='funcs' title='播放'><img src={ require('@/assets/img/image_tools/bofang.png') } alt=""/></div>
+                        :
+                        <div onClick={ this.pause } className='funcs' title='暂停'><img src={ require('@/assets/img/image_tools/zanting.png') } alt=""/></div>
+                    }
+                    <div className='ty_flex' style={{ width: '200px', lineHeight: '40px' }}>
+                        <div style={{ marginRight: '10px', color: 'white' }}>Speed: </div>
+                        <Slider onChange={ speed=> this.setState({ playSpeed: speed }) } style={{ flex: 1 }} disabled={ this.state.play } defaultValue={ this.state.playSpeed } max={ this.state.maxSpeed } min={ this.state.minSpeed } />
+                        <div style={{ marginLeft: '10px', color: 'white' }}>{ this.state.playSpeed }</div>
+                    </div>
                 </div>
             </div>
         )
@@ -107,6 +125,7 @@ class ImageTool extends Component {
         }
     }
     imageUp = async ()=> { //放大
+        this.pause();
         if(this.state.level >= this.state.maxLevel){
             message.warning('已放至最大！');
         }else{
@@ -115,6 +134,7 @@ class ImageTool extends Component {
         }
     }
     imageDown = async ()=> { //缩小
+        this.pause();
         if(this.state.level <= 1){
             message.warning('已缩至最小！');
         }else{
@@ -131,6 +151,7 @@ class ImageTool extends Component {
         }
     }
     turnRight = async ()=> { //右旋
+        this.pause();
         await this.setState({ rotate: this.state.rotate + 1 });
         if(this.state.rotate === 5) {
             await this.setState({ rotate: 1 });
@@ -139,6 +160,7 @@ class ImageTool extends Component {
         this.rotateFuncs();
     }
     turnLeft = async ()=> { //左旋
+        this.pause();
         await this.setState({ rotate: this.state.rotate - 1 });
         if(this.state.rotate === 0) {
             await this.setState({ rotate: 4 });
@@ -159,12 +181,41 @@ class ImageTool extends Component {
         }
     }
     prev = ()=> { //上一张
-        
+        this.pause();
+        this.reset();
+        this.props.prev();
     }
     next = ()=> { //下一张
-
+        this.pause();
+        this.reset();
+        this.props.next();
+    }
+    play = async ()=> { //播放
+        this.reset();
+        await this.setState({ play: true });
+        this.startPlay();
+    }
+    startPlay = ()=> { //循环开始
+        this.timing = setInterval(()=> {
+            this.props.interval();
+        }, this.state.playSpeed * 20);
+    }
+    pause = async ()=> { //暂停
+        await this.setState({ play: false });
+        this.clearTiming();
+    }
+    clearTiming = ()=> { //清除定时器
+        clearInterval(this.timing);
+        this.timing = null;
+    }
+    savePlay = ()=> { //动画下载
+        this.pause();
+    }
+    savePicture = ()=> { //保存图片
+        this.pause();
     }
     reset = async ()=> {
+        this.pause();
         await this.setState({
             imgCon: { width: '100%', height: '100%', top: 0, left: 0 },
             imgConCon: { width: '100%', height: '100%', top: 0, left: 0, marginTop: 0, marginLeft: 0, transform: 'rotate(0deg)' },
