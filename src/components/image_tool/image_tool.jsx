@@ -55,7 +55,7 @@ class ImageTool extends Component {
                     :
                     ''
                 }
-                <div className={ `bottom_tool ty_flex ${ this.state.showAniClass ? 'lb-moveFromBottom' : 'ty_hide' }` }>
+                <div className={ `bottom_tool ty_flex ${ this.state.showAniClass ? 'lb-moveFromBottom_cancel' : 'ty_hide_cancel' }` }>
                     <div onClick={ this.prev } className='funcs' title='上一张'><img src={ require('@/assets/img/image_tools/houtui.png') } alt=""/></div>
                     <div onClick={ this.next } className='funcs' title='下一张'><img src={ require('@/assets/img/image_tools/qianjin.png') } alt=""/></div>
                     <div onClick={ this.imageUp } className='funcs' title='放大'><img src={ require('@/assets/img/image_tools/enlarge.png') } alt=""/></div>
@@ -86,9 +86,11 @@ class ImageTool extends Component {
             imgScale: document.getElementById('ImageTool-img').width/document.getElementById('ImageTool-img').height
         });
     }
-    imageCon = async ({ clientWidth, clientHeight })=> { //获取容器dom
-        await this.setState({ oriWidth: clientWidth, oriHeight: clientHeight });
-        await this.setState({ innerWidth: clientWidth/(clientWidth/clientHeight), innerHeight: clientHeight/(clientWidth/clientHeight) });
+    imageCon = async res=> { //获取容器dom
+        if(res) {
+            await this.setState({ oriWidth: res.clientWidth, oriHeight: res.clientHeight });
+            await this.setState({ innerWidth: res.clientWidth/(res.clientWidth/res.clientHeight), innerHeight: res.clientHeight/(res.clientWidth/res.clientHeight) });
+        }
     }
     drag = e=> { //拖拽事件
         e.persist();

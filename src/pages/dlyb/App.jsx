@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom'
 import routes from '@/router/dlyb'
 import ErrorPage from '@/components/error/error'
+import ScrollInfo from '@/components/scroll_info/scroll_info'
 
 class App extends Component {
 	render() {
 		let isLogin = true;
 		return (
 			<div className='Dlyb'>
+				<ScrollInfo />
 				<HashRouter>
 					<Switch>
 						{/* 根据每条路由信息的auth字段判断当前路由是否需要拦截，
