@@ -1,7 +1,16 @@
 .Header{
-    height: 50px;
-    position: relative;
-    .tab_list{margin: 5px 10px; border: 1px solid red}
-    .tab_list_active{color: white; background-color: blue}
-    .test{position: absolute; right: 200px; width: 100px; height: 100%; top: 0; background-color: red; z-index: 50}
+    width: 100%; height: 60px; position: relative; background-size: 100% 100%; background-position: center; background-repeat: no-repeat;
+    .logo{position: absolute; left: 36px; top: 8px}
+    .hbox{
+        width: 100%; height: 100%;
+        .title{
+            font-size: 25px; color: white; width: 456px; padding-left: 89px; line-height: 58px; font-family: '微软雅黑';
+        }
+        .w_tabs{
+            flex: 1; padding-top: 10px; justify-content: center;
+            .tab_list{height: 50px; padding: 8px 26px 0 26px; font-size: 17px; color: white; cursor: pointer}
+            .tab_list_active{background-color: white; border-top-left-radius: 5px; border-top-right-radius: 5px; box-shadow: 0px -6px 30px #b1b1b1; }
+        }
+        .user{width: 380px; border: 1px solid red}
+    }
 }

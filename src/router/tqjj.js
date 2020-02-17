@@ -1,5 +1,5 @@
 import Login from '@/components/login/login'
-import Index from '@/pages/hszz/business/index/index'
+import Index from '@/pages/tqjj/business/index/index'
 
 const routes = [
     { path: '/login', component: Login },

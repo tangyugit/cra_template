@@ -6,7 +6,7 @@ class ThemePicker extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            cur_color: '#68DE06',
+            cur_color: '#477ae6',
             box_show: false
         };
     }

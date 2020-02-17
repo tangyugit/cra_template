@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import less from 'less';
-import App from '@/pages/hszz/App';
+import App from '@/pages/tqjj/App';
 import * as serviceWorker from '@/utils/serviceWorker';
 
 import '@/assets/css/animations.css'

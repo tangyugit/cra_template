@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom'
-import routes from '@/router/hszz'
+import routes from '@/router/tqjj'
 import ErrorPage from '@/components/error/error'
 
 class App extends Component {
 	render() {
 		let isLogin = true;
 		return (
-			<div className='Hszz'>
+			<div className='Tqjj'>
 				<HashRouter>
 					<Switch>
 						{/* 根据每条路由信息的auth字段判断当前路由是否需要拦截，
