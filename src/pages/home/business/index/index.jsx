@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import '@/pages/home/business/index/index.less'
 import Header from '@/components/header/header'
 import ImageTool from '@/components/image_tool/image_tool'
+import TimeLine from '@/components/time_line/time_line'
 
 class Index extends Component {
     constructor(props) {
         super(props);
+        this.timeline = null;
         this.state = {
             index: 0,
             img: [
@@ -18,12 +20,23 @@ class Index extends Component {
             ]
         };
     }
+    componentDidMount() {
+        this.timeline.init({
+            startTime: new Date(),
+            curTime: new Date(new Date().getTime() + 1*60*60*1000),
+            hours: 4,
+            timeSpace: 6
+        });
+    }
     render() {
         return (
             <div className='Index'>
                 <Header id='home' />
                 <div className='image_test'>
                     <ImageTool src={ this.state.img[this.state.index].src } prev={ this.prev } next={ this.next } interval={ this.next } />
+                </div>
+                <div className='timeline_test'>
+                    <TimeLine onRef={ res=> this.timeline = res } getTimes={ e=> console.log(e)} />
                 </div>
             </div>
         )
