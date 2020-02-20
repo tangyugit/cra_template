@@ -2,6 +2,14 @@ import React, { Component } from 'react'
 import '@/components/image_tool/image_tool.less'
 import { message, Slider } from 'antd'
 
+/*
+** @ params ==>props: 
+** src: 当前图片路径
+** prev: 上一张回调
+** next: 下一张回调
+** interval: 动画播放回调
+*/
+
 class ImageTool extends Component {
     constructor(props) {
         super(props);

@@ -1,0 +1,63 @@
+.WeatherBoard{
+    width: 582px; border-radius: 11px; border: 1px solid; color: white; overflow: hidden; border-right: 1px solid rgb(64,93,146); border-bottom: 1px solid rgb(64,93,146);
+    .weather{
+        height: 366px; position: relative; padding-top: 22px;
+        .position_port{
+            font-size: 17px; align-items: center; justify-content: flex-end; padding-right: 26px;
+            img{display: block; width: 12px; height: 17px}
+        }
+        .time{
+            text-align: right; padding-right: 26px; font-size: 14px; margin-top: 14px;
+        }
+        .list_left_title{color: #f1f1ff}
+        .yz{
+            position: absolute; left: 68px; top: 222px;
+            .list_left_title{width: 88px; text-align: justify;}
+            .list_left_title::after{content: ''; display: inline-block; padding-left: 100%}
+            .list_left_text{width: 180px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap}
+        }
+        .ldwd{
+            position: absolute; left: 364px; top: 222px;
+            .list_left_title{}
+        }
+        .njd{
+            position: absolute; left: 68px; top: 264px;
+            .list_left_title{width: 88px; text-align: justify;}
+            .list_left_title::after{content: ''; display: inline-block; padding-left: 100%}
+            .list_left_text{width: 180px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap}
+        }
+        .xzhy{
+            position: absolute; left: 364px; top: 264px;
+            .list_left_title{}
+        }
+        .fsfx{
+            position: absolute; left: 68px; top: 306px;
+            .list_left_title{width: 88px; text-align: justify;}
+            .list_left_title::after{content: ''; display: inline-block; padding-left: 100%}
+            .list_left_text{width: 180px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap}
+        }
+        .qxyxgl{
+            position: absolute; left: 364px; top: 306px;
+            .list_left_title{}
+        }
+        .w_img{position: absolute; top: 35px; left: 48px}
+        .w_text{font-size: 25px; position: absolute; top: 155px; left: 85px}
+        .w_tem{position: absolute;font-size: 40px; top: 61px; left: 210px}
+    }
+    .skbw{
+        padding: 7px 0 7px 60px; background-color: rgba(0, 3, 41, 0.5); font-size: 13px;color: rgb(189, 206, 236);
+        .list{padding: 7px 0}
+    }
+    .tab_list{
+        height: 48px; line-height: 43px; font-size: 16px; padding-left: 34px; background-color: rgba(0, 3, 41, 0.5); position: relative; cursor: pointer;
+        img{position: absolute; top: 15.5px; right: 21px}
+    }
+    .tb{
+        width: 100%; border-collapse: collapse;table-layout:fixed;
+        td{height: 47px; text-align: center; font-size: 14px; box-sizing: border-box; color: rgb(189, 206, 236)}
+        .td_con{
+            width: 100%; height: 100%; display: flex; justify-content: space-around; align-items: center; overflow: hidden;
+            img{width: 15px; height: 15px}
+        }
+    }
+}

@@ -42,8 +42,12 @@ class TimeLine extends Component {
                             <div onClick={ this.play } style={{ backgroundImage: `url(${ require('@/assets/img/image_tools/bofang.png') })` }} className='list' title='播放'></div>
                         }
                         <div onClick={ this.right } style={{ backgroundImage: `url(${ require('@/assets/img/image_tools/qianjin.png') })` }} className='list' title='前进'></div>
-                        <div onClick={ this.openCharts } style={{ backgroundImage: `url(${ require('@/assets/img/common/zhankai.png') })` }} className='list' title='展开'></div>
-                        <div onClick={ this.closeCharts } style={{ backgroundImage: `url(${ require('@/assets/img/common/shousuo.png') })` }} className='list' title='收缩'></div>
+                        {
+                            this.state.chartsOpen ?
+                            <div onClick={ this.closeCharts } style={{ backgroundImage: `url(${ require('@/assets/img/common/shousuo.png') })` }} className='list' title='收缩'></div>
+                            :
+                            <div onClick={ this.openCharts } style={{ backgroundImage: `url(${ require('@/assets/img/common/zhankai.png') })` }} className='list' title='展开'></div>
+                        }
                     </div>
                     {/* 时间条内容 */}
                     <div className='con'>

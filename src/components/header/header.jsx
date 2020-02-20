@@ -24,7 +24,9 @@ class Header extends Component {
                             ))
                         }
                     </div>
-                    <div className='user'>用户信息预留</div>
+                    <div className='user'>
+                        <div className='bg'></div>
+                    </div>
                 </div>
             </div>
         )
