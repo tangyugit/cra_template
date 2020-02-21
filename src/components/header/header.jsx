@@ -25,7 +25,15 @@ class Header extends Component {
                         }
                     </div>
                     <div className='user'>
-                        <div className='bg'></div>
+                        <div className='bg'>
+                            <div className='sj1'></div>
+                            <div className='sj2'></div>
+                            <div className='bg_con ty_flex'>
+                                <div className='list'>用户中心</div>
+                                <div className='list'>账户设置</div>
+                                <div className='list'>退出</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
