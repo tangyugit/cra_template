@@ -13,7 +13,7 @@ class Header extends Component {
     }
     render() {
         return (
-            <div style={{ backgroundImage: `url(${require('@/assets/img/header/bg.png')})` }} className='Header theme_bg'>
+            <div style={{ backgroundImage: `url(${require('@/assets/img/header/bg.png')})` }} className='Header theme_bg lb-moveFromTop'>
                 <img className='logo' src={ require('@/assets/img/header/logo.png') } alt=""/>
                 <div className='hbox ty_flex'>
                     <div className='title'>中南空管局对流预警预报系统</div>

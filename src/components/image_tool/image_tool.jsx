@@ -36,7 +36,7 @@ class ImageTool extends Component {
     }
     render() {
         return (
-            <div onMouseEnter={ async ()=> await this.setState({ showAniClass: true }) } onMouseLeave={ async ()=> await this.setState({ showAniClass: false }) } className='ImageTool btn_border_radius'>
+            <div onMouseEnter={ async ()=> await this.setState({ showAniClass: true }) } onMouseLeave={ async ()=> await this.setState({ showAniClass: false }) } className='ImageTool'>
                 <img id='ImageTool-img' style={{ display: 'none' }} onLoad={ this.imgOnLoad } src={ this.props.src } alt=""/>
                 {
                     this.state.isImgLoaded ? 
