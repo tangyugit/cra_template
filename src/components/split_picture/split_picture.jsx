@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
 import '@/components/split_picture/split_picture.less'
 
+/*
+** type: 'split'(分屏图)， 'postage'(邮票图)
+** splitImg: [ src: '', time: '' ] 分屏图数组
+** postageImg: [ src: '', time: '' ] 邮票图数组
+*/
+
 class SplitPicture extends Component {
     constructor(props) {
         super(props);

@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
 import '@/pages/home/business/index/index.less'
+import ScrollInfo from '@/components/scroll_info/scroll_info'
 import Header from '@/components/header/header'
 import WeatherBoard from '@/pages/home/business/weather_board/weather_board'
 import TabImage from '@/pages/home/business/tab_image/tab_image'
 
 class Index extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            
-        };
-    }
     render() {
         return (
             <div className='Index'>
@@ -24,6 +19,7 @@ class Index extends Component {
                     </div>
                 </div>
                 <div className='index_bottom theme_bg lb-moveFromBottom'></div>
+                <ScrollInfo />
             </div>
         )
     }
