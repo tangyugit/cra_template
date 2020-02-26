@@ -8,3 +8,5 @@
 包含上下切换、放大、缩小、旋转、重置、动画播放等功能
 
 ## 5.时间条播放组件，带charts图查看功能
+
+npm install yarn -g && yarn && yarn start

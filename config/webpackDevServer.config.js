@@ -100,11 +100,11 @@ module.exports = function(proxy, allowedHost) {
       app.use(errorOverlayMiddleware());
 
       // This service worker file is effectively a 'no-op' that will reset any
-      // previous service worker registered for the same host:port combination.
+      // previous service worker registered for the same host:port c....................................................ombination.
       // We do this in development to avoid hitting the production cache if
       // it used the same host and port.
       // https://github.com/facebook/create-react-app/issues/2272#issuecomment-302832432
-      app.use(noopServiceWorkerMiddleware());
+      if(process.env.NODE_ENV === 'production') app.use(noopServiceWorkerMiddleware());
     },
   };
 };
